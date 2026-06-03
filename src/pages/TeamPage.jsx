@@ -33,16 +33,16 @@ const MANAGEMENT = [
 ];
 
 const DEVELOPERS = [
-  { name: 'Zuber', role: 'AI & Automation Engineer', img: '/Images/Zuber.jpg' },
-  { name: 'Ashvith Adepu', role: 'AI & Automation Engineer', img: '/Images/Ashivth.jpg' },
-  { name: 'Khan', role: 'AI & Automation Engineer', img: '/Images/Khan.jpeg' },
-  { name: 'Mohammed Aqib', role: 'DevOps Engineer', img: '/Images/Aquib.jpg' },
+  { name: 'Zuber', role: 'Full Stack Developer', img: '/Images/Zuber.jpg' },
+  { name: 'Ashvith Adepu', role: 'Full Stack Developer', img: '/Images/Ashivth.jpg' },
+  { name: 'Khan', role: 'Full Stack Developer', img: '/Images/Khan.jpeg' },
+  { name: 'Mohammed Aqib', role: 'Full Stack Developer', img: '/Images/Aquib.jpg' },
   { name: 'Siva', role: 'AI Engineer', img: '/Images/siva.jpeg' },
   { name: 'Suraj', role: 'Backend Developer', img: '/Images/suraj.jpg' },
   { name: 'Sumanth N', role: 'Full Stack Developer', img: '/Images/sumanthn.jpg' },
   { name: 'Sampath', role: 'Frontend Developer', img: '/Images/Sampath.jpg' },
-  { name: 'ManojKumar', role: 'Frontend Developer', img: '/Images/manoj.png' },
-  { name: 'Srinivas K', role: 'Frontend Developer', img: '/Images/srinivas.jpg' },
+  { name: 'ManojKumar', role: 'SDE-1', img: '/Images/manoj.png' },
+  { name: 'Srinivas K', role: 'Full Stack Developer', img: '/Images/srinivas.jpg' },
   { name: 'Prem Kumar', role: 'Full Stack Developer', img: '/Images/prem.jpg' },
   { name: 'Arun Sai', role: 'Full Stack Developer', img: '/Images/arun.jpg' },
 ];
@@ -101,14 +101,6 @@ function DirectorsSection() {
                 <div className="dir-socials">
                   <a href={f.linkedin} target="_blank" rel="noopener noreferrer">
                     <span className="font-mono">LinkedIn</span>
-                    <Arrow size={12} />
-                  </a>
-                  <a href="#">
-                    <span className="font-mono">X / Twitter</span>
-                    <Arrow size={12} />
-                  </a>
-                  <a href="mailto:nithin@threepointolabs.com">
-                    <span className="font-mono">Email</span>
                     <Arrow size={12} />
                   </a>
                 </div>
