@@ -39,10 +39,7 @@ export function PageFooter() {
                 <a href="mailto:nithin@threepointolabs.com">nithin@threepointolabs.com</a>
               </li>
               <li>
-                <a href="#">@threezerolabs</a>
-              </li>
-              <li>
-                <a href="#">LinkedIn ↗</a>
+                <a href="https://www.linkedin.com/company/threepointolabs/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
               </li>
               <li>
                 <a href="#">Hyderabad, India</a>

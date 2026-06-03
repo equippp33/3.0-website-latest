@@ -36,13 +36,10 @@ export function Footer() {
                 <a href="mailto:nithin@threepointolabs.com">nithin@threepointolabs.com</a>
               </li>
               <li>
-                <a href="#">@threezerolabs</a>
+                <a href="https://www.linkedin.com/company/threepointolabs/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
               </li>
               <li>
-                <a href="#">LinkedIn ↗</a>
-              </li>
-              <li>
-                <a href="#">Bengaluru, India</a>
+                <a href="#">Hyderabad, India</a>
               </li>
             </ul>
           </div>
