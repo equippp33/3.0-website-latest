@@ -374,7 +374,7 @@ button { font-family: inherit; cursor: pointer; }
 .marquee-box {
   border: var(--bd); border-radius: var(--r-card);
   background: var(--ink); color: #fff;
-  padding: 18px 0; overflow: hidden;
+  padding: 40px 0; overflow: hidden;
   position: relative;
   box-shadow: inset 0 0 80px rgba(248,142,75,0.10);
 }
@@ -384,9 +384,9 @@ button { font-family: inherit; cursor: pointer; }
     linear-gradient(90deg, var(--ink) 0%, transparent 8%, transparent 92%, var(--ink) 100%);
 }
 .marquee-track {
-  display: flex; gap: 28px; width: max-content;
+  display: flex; gap: 48px; width: max-content;
   animation: marquee 32s linear infinite;
-  padding-left: 32px;
+  padding-left: 48px;
   align-items: center;
 }
 @keyframes marquee {
@@ -395,11 +395,11 @@ button { font-family: inherit; cursor: pointer; }
 .marquee-item {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  height: 80px;
-  padding: 10px 24px;
+  height: 150px;
+  padding: 22px 52px;
   background: rgba(255,255,255,0.96);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  border-radius: 24px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .marquee-item:hover {
@@ -407,20 +407,20 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 14px 30px -12px rgba(248,142,75,0.45);
 }
 .marquee-item img {
-  height: 48px;
+  height: 88px;
   width: auto;
-  max-width: 220px;
+  max-width: 320px;
   object-fit: contain;
   display: block;
 }
 @media (max-width: 768px) {
-  .marquee-track { gap: 18px; padding-left: 20px; }
-  .marquee-item { height: 64px; padding: 8px 18px; border-radius: 14px; }
-  .marquee-item img { height: 38px; max-width: 170px; }
+  .marquee-track { gap: 28px; padding-left: 28px; }
+  .marquee-item { height: 100px; padding: 14px 28px; border-radius: 18px; }
+  .marquee-item img { height: 58px; max-width: 210px; }
 }
 @media (max-width: 480px) {
-  .marquee-item { height: 56px; padding: 6px 14px; }
-  .marquee-item img { height: 32px; max-width: 140px; }
+  .marquee-item { height: 80px; padding: 10px 20px; }
+  .marquee-item img { height: 46px; max-width: 170px; }
 }
 
 .stats-grid {
