@@ -109,11 +109,11 @@ function CaseVisualD() {
   );
 }
 
-// `slug` matches the section id on /portfolio so deep-links scroll to the right case.
+// `route` is the dedicated case-study page — must match CASE_STUDY_ROUTES in PortfolioShowcase.jsx.
 const CASES = [
   {
     id: 'BFSI',
-    slug: 'bfsi',
+    route: '/portfolio/bfsi-skill-portal',
     title: 'BFSI Skill Portal',
     meta: '2025 · Edtech · AI',
     desc: "A skilling platform for India's banking workforce — adaptive paths, in-app coaching, and assessment by an evaluator agent.",
@@ -122,7 +122,7 @@ const CASES = [
   },
   {
     id: 'BCH',
-    slug: 'blue-cross',
+    route: '/portfolio/blue-cross-hyderabad',
     title: 'Blue Cross Hyderabad',
     meta: '2024 · Healthcare · Ops',
     desc: "Operations OS for one of India's largest animal shelters — case intake, triage, donor flows, all unified.",
@@ -131,7 +131,7 @@ const CASES = [
   },
   {
     id: 'FP',
-    slug: 'fundpitch',
+    route: '/portfolio/fundpitch',
     title: 'FundPitch',
     meta: '2024 · Fintech · SaaS',
     desc: 'An AI deal-room for founders — pitch analysis, investor matching, and a writing copilot that actually understands your raise.',
@@ -140,11 +140,11 @@ const CASES = [
   },
   {
     id: 'VDTS',
-    slug: 'vdts',
+    route: '/portfolio/vdts',
     title: 'VDTS',
-    meta: '2023 · Mobility · AI',
-    desc: 'Vehicle diagnostics + tracking system with on-device inference. Real-time fleet decisions where reception is patchy.',
-    tags: ['Edge', 'IoT', 'Vision'],
+    meta: '2023 · Enterprise · Ops',
+    desc: 'A centralized incident-management platform for IT service delivery — ticket creation, admin assignment, consultant workflows, and client-confirmed resolution.',
+    tags: ['Tickets', 'Workflow', 'SaaS'],
     Visual: CaseVisualD,
   },
 ];
@@ -169,7 +169,7 @@ export function CaseStudies() {
             <Link
               className="cs-card fade-up"
               key={c.id}
-              to={`/portfolio#${c.slug}`}
+              to={c.route}
               style={{ transitionDelay: `${i * 60}ms` }}
             >
               <div className="frame">
