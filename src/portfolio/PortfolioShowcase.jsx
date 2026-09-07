@@ -5,7 +5,6 @@ import { portfolioProjects } from './portfolioData';
 const CASE_STUDY_ROUTES = {
   'bfsi-skill-portal': '/portfolio/bfsi-skill-portal',
   'blue-cross-hyderabad': '/portfolio/blue-cross-hyderabad',
-  'revision-prep': '/portfolio/revision-prep',
   'vdts': '/portfolio/vdts',
   'sailyour-ai': '/portfolio/sailyour-ai',
   'bhoomibox': '/portfolio/bhoomibox',

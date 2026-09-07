@@ -1,6 +1,5 @@
 import bfsiImage from './assets/bfsi.svg';
 import blueCrossImage from './assets/blue-cross.svg';
-import revisionPrepImage from './assets/revision-prep.png';
 import vdtsImage from './assets/vdts.svg';
 import sailYourImage from './assets/sailyour-ai.svg';
 import bhoomiboxImage from './assets/bhoomibox.svg';
@@ -26,17 +25,8 @@ export const portfolioProjects = [
     tags: ['Field Ops', 'Mobile App', 'Analytics'],
   },
   {
-    id: 'revision-prep',
-    number: '03',
-    title: 'Revision Prep',
-    image: revisionPrepImage,
-    summary:
-      'A revision platform with curriculum-aligned practice, precision filtering, AI explanations, and guided learning flows.',
-    tags: ['Practice Engine', 'AI Tutor', 'Analytics'],
-  },
-  {
     id: 'vdts',
-    number: '04',
+    number: '03',
     title: 'VDTS',
     image: vdtsImage,
     summary:
@@ -45,7 +35,7 @@ export const portfolioProjects = [
   },
   {
     id: 'sailyour-ai',
-    number: '05',
+    number: '04',
     title: 'SailYour AI',
     image: sailYourImage,
     summary:
@@ -54,7 +44,7 @@ export const portfolioProjects = [
   },
   {
     id: 'bhoomibox',
-    number: '06',
+    number: '05',
     title: 'BhoomiBox',
     image: bhoomiboxImage,
     summary:
@@ -63,7 +53,7 @@ export const portfolioProjects = [
   },
   {
     id: 'fundpitch',
-    number: '07',
+    number: '06',
     title: 'FundPitch',
     image: fundpitchImage,
     summary:

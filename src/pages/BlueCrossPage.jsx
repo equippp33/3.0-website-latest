@@ -311,8 +311,8 @@ export default function BlueCrossPage() {
               </h2>
             </div>
             <p>
-              Revision Prep — a curriculum-aligned practice platform with AI explanations, precision
-              filtering, and guided learning flows for competitive exam students.
+              VDTS — a structured incident-management and ticket-resolution system with admin
+              assignment, consultant workflows, and client confirmation.
             </p>
             <Link to="/portfolio" className="btn btn-dark">
               Back to portfolio <Arrow />

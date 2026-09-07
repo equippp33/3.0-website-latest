@@ -7,7 +7,6 @@ const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
 const PortfolioPage = lazy(() => import('@/pages/PortfolioPage'));
 const BFSISkillPortalPage = lazy(() => import('@/pages/BFSISkillPortalPage'));
 const BlueCrossPage = lazy(() => import('@/pages/BlueCrossPage'));
-const RevisionPrepPage = lazy(() => import('@/pages/RevisionPrepPage'));
 const VDTSPage = lazy(() => import('@/pages/VDTSPage'));
 const SailyourPage = lazy(() => import('@/pages/SailyourPage'));
 const BhoomiBoxPage = lazy(() => import('@/pages/BhoomiBoxPage'));
@@ -30,7 +29,6 @@ export default function App() {
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/portfolio/bfsi-skill-portal" element={<BFSISkillPortalPage />} />
           <Route path="/portfolio/blue-cross-hyderabad" element={<BlueCrossPage />} />
-          <Route path="/portfolio/revision-prep" element={<RevisionPrepPage />} />
           <Route path="/portfolio/vdts" element={<VDTSPage />} />
           <Route path="/portfolio/sailyour-ai" element={<SailyourPage />} />
           <Route path="/portfolio/bhoomibox" element={<BhoomiBoxPage />} />

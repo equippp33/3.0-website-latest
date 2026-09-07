@@ -25,9 +25,9 @@ export default function PortfolioPage() {
         kicker="Portfolio / Selected work"
         title={{ before: 'Case ', after: '' }}
         italicWord="Studies"
-        sub="Seven production builds across government skilling, NGO field operations, AI learning, enterprise helpdesks, agritech marketplaces, and fintech workflows."
+        sub="Six production builds across government skilling, NGO field operations, AI learning, enterprise helpdesks, agritech marketplaces, and fintech workflows."
         meta={[
-          ['Cases', '07'],
+          ['Cases', '06'],
           ['Industries', '06'],
           ['Years', '2023-2025'],
           ['Focus', 'AI products'],

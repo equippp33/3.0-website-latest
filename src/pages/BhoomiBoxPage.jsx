@@ -221,7 +221,7 @@ export default function BhoomiBoxPage() {
               </h2>
             </div>
             <p>
-              Seven production builds across AI learning, government skilling, NGO field
+              Six production builds across AI learning, government skilling, NGO field
               operations, agritech, and fintech — each one solving a real operational problem.
             </p>
             <Link to="/portfolio" className="btn btn-dark">
