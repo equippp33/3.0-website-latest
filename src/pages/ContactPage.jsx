@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useReveal } from '@/hooks/useReveal';
-import { Arrow, Eyebrow } from '@/components';
+import { Arrow, Eyebrow, Seo } from '@/components';
 import { PageNavbar } from '@/shell/PageNavbar';
 import { PageHero } from '@/shell/PageHero';
 import { PageFooter } from '@/shell/PageFooter';
@@ -328,10 +328,9 @@ export default function ContactPage() {
   useReveal();
   return (
     <>
-      <title>Contact — 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Tell us what you're trying to build. One short note is enough — we read every message and reply within one working day."
+      <Seo
+        title="Contact — 3.0 Labs"
+        description="Tell us what you're trying to build. One short note is enough — we read every message and reply within one working day."
       />
       <PageNavbar active="contact" />
       <PageHero

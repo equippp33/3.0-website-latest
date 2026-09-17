@@ -1,4 +1,5 @@
 import { useReveal } from '@/hooks/useReveal';
+import { Seo } from '@/components';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
@@ -14,10 +15,10 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <title>Portfolio - 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Selected 3.0 Labs portfolio builds across AI, SaaS, edtech, healthcare, agritech, and fintech."
+      <Seo
+        title="Portfolio — 3.0 Labs"
+        description="Selected 3.0 Labs portfolio builds across AI, SaaS, edtech, healthcare, agritech, and fintech."
+        breadcrumb={['Portfolio']}
       />
       <PageNavbar active="portfolio" />
       <PageHero

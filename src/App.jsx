@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ScrollToTop } from '@/utils/ScrollToTop';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
@@ -13,6 +13,7 @@ const BhoomiBoxPage = lazy(() => import('@/pages/BhoomiBoxPage'));
 const FundPitchPage = lazy(() => import('@/pages/FundPitchPage'));
 const TeamPage = lazy(() => import('@/pages/TeamPage'));
 const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function PageFallback() {
   return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} aria-hidden="true" />;
@@ -35,7 +36,7 @@ export default function App() {
           <Route path="/portfolio/fundpitch" element={<FundPitchPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -4,11 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#FFF9F5" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      Site-level SEO fallback. Googlebot renders JS and picks up the per-page
+      tags from <Seo>, but Slack/WhatsApp/LinkedIn scrapers don't — they only
+      ever see this shell, so every shared link falls back to these values.
+      Per-page previews would need the routes prerendered at build time.
+
+      data-seo-fallback marks them for removal once React has mounted its own
+      tags, so the live document never carries two of anything. Don't add a tag
+      here that <Seo> also emits without the attribute.
+    -->
     <meta
+      data-seo-fallback
       name="description"
       content="3.0 Labs — an AI product studio engineering scalable software, workflows, and autonomous agents for founders."
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link data-seo-fallback rel="canonical" href="https://threepointolabs.com/" />
+    <meta data-seo-fallback property="og:type" content="website" />
+    <meta data-seo-fallback property="og:site_name" content="3.0 Labs" />
+    <meta data-seo-fallback property="og:url" content="https://threepointolabs.com/" />
+    <meta
+      data-seo-fallback
+      property="og:title"
+      content="3.0 Labs — Engineering Ideas Into Intelligent Products"
+    />
+    <meta
+      data-seo-fallback
+      property="og:description"
+      content="3.0 Labs — an AI product studio engineering scalable software, workflows, and autonomous agents for founders."
+    />
+    <meta
+      data-seo-fallback
+      property="og:image"
+      content="https://threepointolabs.com/Images/Logo.png"
+    />
+    <meta data-seo-fallback name="twitter:card" content="summary_large_image" />
+
+    <!--
+      Organization + WebSite graph. Static rather than React-rendered: it's
+      identical on every route, and keeping it in the shell means it's readable
+      without executing JS. Every claim here has to stay matched by something
+      visible on the site — don't add a postal address or phone number that the
+      pages themselves don't state.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://threepointolabs.com/#organization",
+            "name": "3.0 Labs",
+            "alternateName": "Threepointolabs",
+            "url": "https://threepointolabs.com/",
+            "logo": "https://threepointolabs.com/Images/Logo.png",
+            "image": "https://threepointolabs.com/Images/Logo.png",
+            "description": "An AI product studio engineering scalable software, workflows, and autonomous agents for founders.",
+            "email": "nithin@threepointolabs.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hyderabad",
+              "addressCountry": "IN"
+            },
+            "sameAs": ["https://www.linkedin.com/company/threepointolabs/"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://threepointolabs.com/#website",
+            "url": "https://threepointolabs.com/",
+            "name": "3.0 Labs",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://threepointolabs.com/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +89,7 @@
       rel="stylesheet"
     />
 
-    <title>3.0 Labs — Engineering Ideas Into Intelligent Products</title>
+    <title data-seo-fallback>3.0 Labs — Engineering Ideas Into Intelligent Products</title>
   </head>
   <body>
     <div id="root"></div>

@@ -3,7 +3,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
-import { Arrow, Eyebrow, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, NodeBadge, Seo } from '@/components';
 import sailyourCover from '@/portfolio/assets/sailyour-ai.svg';
 import '@/portfolio/sailyour/sailyour.css';
 
@@ -110,10 +110,11 @@ export default function SailyourPage() {
 
   return (
     <>
-      <title>Sailyour — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Sailyour — a full-stack AI-powered mock interview platform for colleges and universities. AI video analysis, computer vision scoring, radar charts, and admin analytics."
+      <Seo
+        type="article"
+        title="Sailyour — Case Study · 3.0 Labs"
+        description="Sailyour — a full-stack AI-powered mock interview platform for colleges and universities. AI video analysis, computer vision scoring, radar charts, and admin analytics."
+        breadcrumb={['Portfolio', 'SailYour AI']}
       />
 
       <PageNavbar active="portfolio" />

@@ -3,7 +3,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
-import { Arrow, Eyebrow } from '@/components';
+import { Arrow, Eyebrow, Seo } from '@/components';
 import bhoomiboxCover from '@/portfolio/assets/bhoomibox.svg';
 import '@/portfolio/bhoomibox/bhoomibox.css';
 
@@ -43,10 +43,11 @@ export default function BhoomiBoxPage() {
 
   return (
     <>
-      <title>Bhoomi Box — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Bhoomi Box — a direct-to-consumer platform connecting urban families with local farmers. Transparent pricing, premium quality, and full traceability from field to kitchen."
+      <Seo
+        type="article"
+        title="Bhoomi Box — Case Study · 3.0 Labs"
+        description="Bhoomi Box — a direct-to-consumer platform connecting urban families with local farmers. Transparent pricing, premium quality, and full traceability from field to kitchen."
+        breadcrumb={['Portfolio', 'BhoomiBox']}
       />
 
       <PageNavbar active="portfolio" />

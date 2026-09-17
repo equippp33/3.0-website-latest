@@ -3,7 +3,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
-import { Arrow, Eyebrow, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, NodeBadge, Seo } from '@/components';
 import vdtsCover from '@/portfolio/assets/vdts.svg';
 import '@/portfolio/vdts/vdts.css';
 
@@ -196,10 +196,11 @@ export default function VDTSPage() {
 
   return (
     <>
-      <title>VDTS — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="A centralized Incident Management System for VDTS — streamlining ticket creation, assignment, tracking, and resolution across Admin, Consultant, and Client roles."
+      <Seo
+        type="article"
+        title="VDTS — Case Study · 3.0 Labs"
+        description="A centralized Incident Management System for VDTS — streamlining ticket creation, assignment, tracking, and resolution across Admin, Consultant, and Client roles."
+        breadcrumb={['Portfolio', 'VDTS']}
       />
 
       <PageNavbar active="portfolio" />

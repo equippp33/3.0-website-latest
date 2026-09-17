@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '@/hooks/useReveal';
-import { Arrow, Eyebrow, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, NodeBadge, Seo } from '@/components';
 import { PageNavbar } from '@/shell/PageNavbar';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageCTA } from '@/shell/PageCTA';
@@ -499,10 +499,9 @@ export default function ServicesPage() {
   useReveal();
   return (
     <>
-      <title>Services — 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Full-stack products, AI workflows, and autonomous agents. We design and build software that transforms how products operate and grow."
+      <Seo
+        title="Services — 3.0 Labs"
+        description="Full-stack products, AI workflows, and autonomous agents. We design and build software that transforms how products operate and grow."
       />
       <PageNavbar active="services" />
       <ServicesHero />

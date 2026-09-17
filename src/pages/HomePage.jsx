@@ -1,4 +1,5 @@
 import { useReveal } from '@/hooks/useReveal';
+import { Seo } from '@/components';
 import { Navbar } from '@/sections/Navbar';
 import { Hero } from '@/sections/Hero';
 import { ProductsShipped } from '@/sections/ProductsShipped';
@@ -11,10 +12,9 @@ export default function HomePage() {
   useReveal();
   return (
     <>
-      <title>3.0 Labs — Engineering Ideas Into Intelligent Products</title>
-      <meta
-        name="description"
-        content="3.0 Labs designs and ships AI-powered software — full-stack applications, automation workflows, and autonomous agents — for founders building what's next."
+      <Seo
+        title="3.0 Labs — Engineering Ideas Into Intelligent Products"
+        description="3.0 Labs designs and ships AI-powered software — full-stack applications, automation workflows, and autonomous agents — for founders building what's next."
       />
       <Navbar />
       <Hero />

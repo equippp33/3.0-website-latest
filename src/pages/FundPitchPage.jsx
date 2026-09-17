@@ -3,7 +3,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
-import { Arrow, Eyebrow } from '@/components';
+import { Arrow, Eyebrow, Seo } from '@/components';
 import fundpitchCover from '@/portfolio/assets/fundpitch.svg';
 import '@/portfolio/fundpitch/fundpitch.css';
 
@@ -100,10 +100,11 @@ export default function FundPitchPage() {
 
   return (
     <>
-      <title>FundPitch — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="FundPitch — an invite-only SEBI-compliant platform connecting growth-stage companies with merchant bankers, investment bankers, and financial partners."
+      <Seo
+        type="article"
+        title="FundPitch — Case Study · 3.0 Labs"
+        description="FundPitch — an invite-only SEBI-compliant platform connecting growth-stage companies with merchant bankers, investment bankers, and financial partners."
+        breadcrumb={['Portfolio', 'FundPitch']}
       />
 
       <PageNavbar active="portfolio" />

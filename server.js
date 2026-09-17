@@ -1,4 +1,4 @@
-import { createReadStream } from 'node:fs';
+import { createReadStream, readFileSync } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
@@ -10,6 +10,42 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, 'dist');
 const port = Number(process.env.PORT || 3000);
 const hostname = process.env.HOSTNAME || '0.0.0.0';
+
+// The one host search engines should index. Requests arriving on any other
+// hostname (notably www.) get a 301 here so Google never has to guess which
+// duplicate is canonical.
+const CANONICAL_HOST = process.env.CANONICAL_HOST || 'threepointolabs.com';
+
+/** Retired URLs that once ranked, kept as 301s so their link equity survives. */
+const REDIRECTS = new Map([['/portfolio/revision-prep', '/portfolio']]);
+
+/**
+ * Paths the SPA actually renders, read out of the generated sitemap so there's
+ * no second route list to keep in sync — scripts/generate-sitemap.js derives it
+ * from App.jsx at build time. Anything outside this set is a real 404.
+ */
+const knownRoutes = readKnownRoutes();
+
+function readKnownRoutes() {
+  try {
+    const xml = readFileSync(path.join(distDir, 'sitemap.xml'), 'utf8');
+    const paths = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => new URL(loc).pathname);
+    if (paths.length === 0) throw new Error('sitemap contained no <loc> entries');
+    return new Set(paths);
+  } catch (err) {
+    // Without the sitemap we can't tell a real route from a typo, so fall back
+    // to the old behaviour: every unmatched path renders the app with a 200.
+    console.warn(`[server] no route manifest (${err.message}); serving SPA fallback for all paths`);
+    return null;
+  }
+}
+
+/** True when `pathname` is a route the client router will render. */
+function isKnownRoute(pathname) {
+  if (knownRoutes === null) return true;
+  const normalized = pathname !== '/' ? pathname.replace(/\/+$/, '') : pathname;
+  return knownRoutes.has(normalized) || knownRoutes.has(`${normalized}/`);
+}
 
 const mimeTypes = new Map([
   ['.html', 'text/html; charset=utf-8'],
@@ -29,6 +65,26 @@ const mimeTypes = new Map([
   ['.woff', 'font/woff'],
   ['.woff2', 'font/woff2'],
 ]);
+
+/**
+ * Where a request should be 301'd, or null if it's already canonical.
+ *
+ * Host redirects only fire for subdomains of the canonical host, so health
+ * checks and container-IP requests (localhost, 10.x, the Coolify internal
+ * name) are left alone.
+ */
+function redirectFor(req, url) {
+  const target = REDIRECTS.get(url.pathname.replace(/\/+$/, '') || '/');
+  const host = (req.headers.host || '').split(':')[0].toLowerCase();
+  const wrongHost = host.endsWith(`.${CANONICAL_HOST}`);
+
+  if (!target && !wrongHost) return null;
+
+  const pathname = target || url.pathname;
+  return wrongHost
+    ? `https://${CANONICAL_HOST}${pathname}${url.search}`
+    : `${pathname}${url.search}`;
+}
 
 function sendJson(res, statusCode, body) {
   res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -76,8 +132,13 @@ async function serveFile(res, requestedPath) {
     res.writeHead(200, headers);
     createReadStream(filePath).pipe(res);
   } catch {
+    // No file at that path — hand over to the client router. A path it doesn't
+    // route gets the same shell with a 404 status, so crawlers drop it instead
+    // of indexing it as a near-duplicate of the pages it can reach.
     const indexPath = path.join(distDir, 'index.html');
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.writeHead(isKnownRoute(pathname) ? 200 : 404, {
+      'Content-Type': 'text/html; charset=utf-8',
+    });
     createReadStream(indexPath).pipe(res);
   }
 }
@@ -86,6 +147,17 @@ const server = createServer(async (req, res) => {
   const url = new URL(req.url || '/', 'http://localhost');
 
   try {
+    // Canonicalisation runs first, but never on /api/ — a 301 would turn the
+    // contact form's POST into a GET.
+    if (!url.pathname.startsWith('/api/')) {
+      const location = redirectFor(req, url);
+      if (location) {
+        res.writeHead(301, { Location: location });
+        res.end();
+        return;
+      }
+    }
+
     if (url.pathname === '/api/contact') {
       await contactHandler(req, withVercelResponseHelpers(res));
       return;

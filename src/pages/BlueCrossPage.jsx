@@ -4,7 +4,7 @@ import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
 import { PageCTA } from '@/shell/PageCTA';
-import { Arrow, Eyebrow, ImgPlaceholder, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, ImgPlaceholder, NodeBadge, Seo } from '@/components';
 import blueCrossCover from '@/portfolio/assets/blue-cross.svg';
 import '@/portfolio/blue-cross/blue-cross.css';
 
@@ -105,10 +105,11 @@ export default function BlueCrossPage() {
 
   return (
     <>
-      <title>Blue Cross Hyderabad — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="An end-to-end platform to support Animal Birth Control and Anti-Rabies Vaccination programs for Blue Cross of Hyderabad."
+      <Seo
+        type="article"
+        title="Blue Cross Hyderabad — Case Study · 3.0 Labs"
+        description="An end-to-end platform to support Animal Birth Control and Anti-Rabies Vaccination programs for Blue Cross of Hyderabad."
+        breadcrumb={['Portfolio', 'Blue Cross Hyderabad']}
       />
 
       <PageNavbar active="portfolio" />

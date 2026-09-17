@@ -3,7 +3,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { PageFooter } from '@/shell/PageFooter';
 import { PageHero } from '@/shell/PageHero';
 import { PageNavbar } from '@/shell/PageNavbar';
-import { Arrow, Eyebrow, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, NodeBadge, Seo } from '@/components';
 import bfsiCover from '@/portfolio/assets/bfsi.svg';
 import '@/portfolio/bfsi/bfsi.css';
 
@@ -96,10 +96,11 @@ export default function BFSISkillPortalPage() {
 
   return (
     <>
-      <title>BFSI Skill Portal — Case Study · 3.0 Labs</title>
-      <meta
-        name="description"
-        content="A centralized platform supporting the BFSI Minor Degree Program — combining student tracking, structured evaluation, CSR reporting, and hiring access in one unified system."
+      <Seo
+        type="article"
+        title="BFSI Skill Portal — Case Study · 3.0 Labs"
+        description="A centralized platform supporting the BFSI Minor Degree Program — combining student tracking, structured evaluation, CSR reporting, and hiring access in one unified system."
+        breadcrumb={['Portfolio', 'BFSI Skill Portal']}
       />
 
       <PageNavbar active="portfolio" />

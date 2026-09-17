@@ -40,10 +40,11 @@ production-grade foundation with routing, code splitting, linting, and formattin
 │   ├── App.jsx                # router + Suspense boundary
 │   └── main.jsx               # createRoot + StrictMode
 ├── index.html                 # single Vite entry; preconnects + Google Fonts
+├── server.js                  # production host: static dist/ + /api routes + redirects
+├── Dockerfile                 # build + runtime image deployed by Coolify
 ├── vite.config.js
 ├── eslint.config.js
 ├── .prettierrc.json
-├── vercel.json
 └── package.json
 ```
 
@@ -56,7 +57,7 @@ production-grade foundation with routing, code splitting, linting, and formattin
 | `/portfolio` | `PortfolioPage`   | Seven case studies with sticky index    |
 | `/team`      | `TeamPage`        | Directors + Management/Developers/Design |
 | `/contact`   | `ContactPage`     | Brief form + offices                    |
-| `*`          | redirect to `/`   |                                         |
+| `*`          | `NotFoundPage`    | Served with a real 404 status — see below |
 
 ## Commands
 
@@ -119,9 +120,11 @@ The Contact page form sends submissions directly to your inbox via
 
 6. **Restart `npm run dev`** — Vite only picks up env vars on boot.
 
-### Deploying to Vercel
+### Deploying
 
-Add the same four `VITE_*` variables under **Project Settings → Environment Variables** before redeploying. They get baked into the build, so changing them requires a new deploy.
+Add the same four `VITE_*` variables to the Coolify service's build environment before
+redeploying. They get baked into the bundle at build time, so changing them requires a new
+deploy — not just a restart.
 
 ### Notes
 
@@ -129,33 +132,34 @@ Add the same four `VITE_*` variables under **Project Settings → Environment Va
 - All `VITE_*` vars are exposed to the client by design — EmailJS's public key is *meant* to be public; it only allows sending against your template, not arbitrary access to your account.
 - Free tier: 200 emails/month. Bump to a paid plan if you outgrow it.
 
-## Deploy to Vercel
+## Deploy (Coolify)
 
-The repo ships with a `vercel.json` that already configures:
+Coolify builds the `Dockerfile` and runs `node server.js` on `PORT` (default 3000).
+`server.js` is the whole production host — there's no nginx or platform config in front of it:
 
-- `framework: vite` — Vercel detects the Vite preset
-- `outputDirectory: dist`
-- a **SPA rewrite** so every path falls back to `index.html` (so direct `/portfolio` loads work)
-- 1-year immutable cache on `/assets/*` (Vite hashes those filenames)
+- serves the built `dist/`, with a 1-year immutable cache on `/assets/*` (Vite hashes those)
+- falls back to `index.html` so direct loads of `/portfolio` work
+- answers **404** for paths the router doesn't know, instead of quietly serving the homepage —
+  the route list comes from the generated `sitemap.xml`, so it stays in sync with `App.jsx`
+- **301**s retired URLs (`REDIRECTS`) and any non-canonical host to `CANONICAL_HOST`
+- handles `POST /api/contact`
 
-### One-time setup
+### Environment
 
-```bash
-# 1. Install the Vercel CLI (optional, web flow works too)
-npm i -g vercel
+| Variable | Used by | Notes |
+| --- | --- | --- |
+| `PORT`, `HOSTNAME` | `server.js` | default `3000` / `0.0.0.0` |
+| `CANONICAL_HOST` | `server.js` | default `threepointolabs.com`; subdomains get 301'd to it |
+| `SES_USER`, `SES_PASSWORD`, `SES_REGION` | contact form | SMTP credentials |
+| `SENDER_EMAIL`, `NOTIFICATION_TO_EMAIL` | contact form | from / to addresses |
+| `DATABASE_URL` | contact form | Postgres connection string |
+| `VITE_*` | build | baked into the bundle — build-time only |
 
-# 2. From the project root:
-vercel
+### DNS
 
-# Follow prompts. Vercel will detect Vite automatically.
-```
-
-### Continuous deploys
-
-1. Push the repo to a Git host (GitHub / GitLab / Bitbucket).
-2. On Vercel, **New Project → Import** the repo.
-3. Leave Build / Output as auto-detected (Vite preset).
-4. Click Deploy.
+Both the apex and `www` must point at the app. `www` returning an error while the apex works
+splits the site across two hosts in Google's index, which is what `CANONICAL_HOST` exists to
+collapse — but the 301 can only fire if the request actually reaches the container.
 
 ## What changed technically
 
@@ -166,7 +170,7 @@ vercel
 | **Module system**             | Globals on `window` (`Object.assign(window, …)`)  | ES modules with named exports + a `@/` path alias     |
 | **Routing**                   | Multiple `.html` files, full page reloads         | React Router 7 SPA, code-split per-route              |
 | **Code splitting**            | None — all JSX shipped together                   | `React.lazy` per page + manual `react` / `router` chunks |
-| **SEO meta**                  | Static `<title>` in HTML only                     | Per-page React 19 native `<title>` + `<meta>` tags    |
+| **SEO meta**                  | Static `<title>` in HTML only                     | Per-page `<Seo>`: title, description, canonical, og/twitter |
 | **Build pipeline**            | None                                              | `npm run build` → minified, hashed, tree-shaken `dist/` |
 | **Lint / format**             | None                                              | ESLint 9 flat config + Prettier                       |
 | **Type-safety nets**          | `/* global */` comments                           | Explicit imports — no implicit globals                |

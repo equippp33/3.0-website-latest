@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useReveal } from '@/hooks/useReveal';
-import { Arrow, Eyebrow, NodeBadge } from '@/components';
+import { Arrow, Eyebrow, NodeBadge, Seo } from '@/components';
 import { PageNavbar } from '@/shell/PageNavbar';
 import { PageFooter } from '@/shell/PageFooter';
 
@@ -35,15 +35,15 @@ const MANAGEMENT = [
 const DEVELOPERS = [
   { name: 'Zuber', role: 'Full Stack Developer', img: '/Images/Zuber.jpg' },
   { name: 'Ashvith Adepu', role: 'Full Stack Developer', img: '/Images/Ashivth.jpg' },
-  { name: 'Khan', role: 'Full Stack Developer', img: '/Images/Khan.jpeg' },
+  { name: 'Khan', role: 'Backend Developer', img: '/Images/Khan.jpeg' },
   { name: 'Mohammed Aqib', role: 'Full Stack Developer', img: '/Images/Aquib.jpg' },
   { name: 'Siva', role: 'AI Engineer', img: '/Images/siva.jpeg' },
-  { name: 'Suraj', role: 'Backend Developer', img: '/Images/suraj.jpg' },
+  { name: 'Sai Suraj', role: 'Full Stack Developer', img: '/Images/suraj.jpg' },
   { name: 'Sumanth N', role: 'Full Stack Developer', img: '/Images/sumanthn.jpg' },
   { name: 'Sampath', role: 'Frontend Developer', img: '/Images/Sampath.jpg' },
   { name: 'ManojKumar', role: 'SDE-1', img: '/Images/manoj.png' },
   { name: 'Srinivas K', role: 'Full Stack Developer', img: '/Images/srinivas.jpg' },
-  { name: 'Prem Kumar', role: 'Full Stack Developer', img: '/Images/prem.jpg' },
+  { name: 'Prem Kumar', role: 'Frontend Developer', img: '/Images/prem.jpg' },
   { name: 'Arun Sai', role: 'Full Stack Developer', img: '/Images/arun.jpg' },
 ];
 
@@ -538,10 +538,9 @@ export default function TeamPage() {
   useReveal();
   return (
     <>
-      <title>Team — 3.0 Labs</title>
-      <meta
-        name="description"
-        content="Meet the 3.0 Labs team — two founders, twenty-plus builders across product, AI engineering, and design."
+      <Seo
+        title="Team — 3.0 Labs"
+        description="Meet the 3.0 Labs team — two founders, twenty-plus builders across product, AI engineering, and design."
       />
       <PageNavbar active="team" />
       <DirectorsSection />
