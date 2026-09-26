@@ -47,6 +47,32 @@ function isKnownRoute(pathname) {
   return knownRoutes.has(normalized) || knownRoutes.has(`${normalized}/`);
 }
 
+/**
+ * The SPA shell, read once. Its fallback canonical and og:url point at the
+ * homepage, and Google reads the canonical from the raw HTML before any JS
+ * runs — serve that unchanged on /services and Google files the page as a
+ * duplicate of /. So each known route gets the shell with those two URLs
+ * rewritten to its own (same trailing-slash-free form as canonicalFor in
+ * src/components/Seo.jsx).
+ */
+const shellHtml = readShell();
+
+function readShell() {
+  try {
+    return readFileSync(path.join(distDir, 'index.html'), 'utf8');
+  } catch {
+    return null;
+  }
+}
+
+function shellFor(pathname) {
+  const clean = pathname.replace(/\/+$/, '');
+  const canonical = clean ? `https://${CANONICAL_HOST}${clean}` : `https://${CANONICAL_HOST}/`;
+  return shellHtml
+    .replace(/(rel="canonical"\s+href=")[^"]*"/, `$1${canonical}"`)
+    .replace(/(property="og:url"\s+content=")[^"]*"/, `$1${canonical}"`);
+}
+
 const mimeTypes = new Map([
   ['.html', 'text/html; charset=utf-8'],
   ['.js', 'text/javascript; charset=utf-8'],
@@ -135,11 +161,17 @@ async function serveFile(res, requestedPath) {
     // No file at that path — hand over to the client router. A path it doesn't
     // route gets the same shell with a 404 status, so crawlers drop it instead
     // of indexing it as a near-duplicate of the pages it can reach.
-    const indexPath = path.join(distDir, 'index.html');
-    res.writeHead(isKnownRoute(pathname) ? 200 : 404, {
+    const known = isKnownRoute(pathname);
+    res.writeHead(known ? 200 : 404, {
       'Content-Type': 'text/html; charset=utf-8',
     });
-    createReadStream(indexPath).pipe(res);
+    if (shellHtml === null) {
+      createReadStream(path.join(distDir, 'index.html')).pipe(res);
+      return;
+    }
+    // Only rewrite for real routes: the path is then one we generated, never
+    // arbitrary request input echoed into the page.
+    res.end(known && knownRoutes !== null ? shellFor(pathname) : shellHtml);
   }
 }
 

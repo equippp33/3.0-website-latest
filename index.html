@@ -15,6 +15,10 @@
       data-seo-fallback marks them for removal once React has mounted its own
       tags, so the live document never carries two of anything. Don't add a tag
       here that <Seo> also emits without the attribute.
+
+      server.js rewrites the canonical and og:url below to each route's own URL
+      before serving the shell, so keep them as rel/href and property/content
+      attribute pairs in that order.
     -->
     <meta
       data-seo-fallback
