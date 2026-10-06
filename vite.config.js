@@ -43,7 +43,7 @@ function devApiPlugin() {
   };
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   // Surface ALL .env values (not just VITE_*) on process.env so the dev API
   // middleware can read DATABASE_URL, SES_*, etc.
   const env = loadEnv(mode, process.cwd(), '');
@@ -62,6 +62,10 @@ export default defineConfig(({ mode }) => {
       target: 'es2020',
       cssCodeSplit: true,
       sourcemap: false,
+      // scripts/prerender.js reads the manifest to link each page's CSS chunk;
+      // the SSR bundle it renders with doesn't need its own copy of public/.
+      manifest: !isSsrBuild,
+      copyPublicDir: !isSsrBuild,
       rollupOptions: {
         output: {
           manualChunks(id) {

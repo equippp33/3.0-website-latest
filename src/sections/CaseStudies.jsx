@@ -69,7 +69,9 @@ function CaseVisualC() {
         {[...Array(40)].map((_, i) => {
           const x = (i % 10) * 32 + 20;
           const y = Math.floor(i / 10) * 36 + 20;
-          const show = Math.random() < 0.55;
+          // Fixed scatter rather than Math.random(): the page is prerendered, and
+          // a random pattern would differ from the server markup on hydration.
+          const show = (i * 37 + 11) % 100 < 55;
           if (!show) return null;
           return <rect key={i} x={x} y={y} width="26" height="26" rx="7" fill="url(#cgrad)" opacity={0.85} />;
         })}

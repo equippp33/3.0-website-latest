@@ -7,18 +7,13 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!--
-      Site-level SEO fallback. Googlebot renders JS and picks up the per-page
-      tags from <Seo>, but Slack/WhatsApp/LinkedIn scrapers don't — they only
-      ever see this shell, so every shared link falls back to these values.
-      Per-page previews would need the routes prerendered at build time.
+      Site-level SEO fallback for the dev server, which serves this shell
+      unrendered. In production builds scripts/prerender.js strips every
+      data-seo-fallback tag and writes each route's own <Seo> tags into <head>.
 
-      data-seo-fallback marks them for removal once React has mounted its own
-      tags, so the live document never carries two of anything. Don't add a tag
-      here that <Seo> also emits without the attribute.
-
-      server.js rewrites the canonical and og:url below to each route's own URL
-      before serving the shell, so keep them as rel/href and property/content
-      attribute pairs in that order.
+      data-seo-fallback also marks them for removal once React has mounted its
+      own tags, so the live document never carries two of anything. Don't add a
+      tag here that <Seo> also emits without the attribute.
     -->
     <meta
       data-seo-fallback

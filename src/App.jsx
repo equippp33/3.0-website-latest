@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ScrollToTop } from '@/utils/ScrollToTop';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
@@ -19,9 +19,13 @@ function PageFallback() {
   return <div style={{ minHeight: '100vh', background: 'var(--bg)' }} aria-hidden="true" />;
 }
 
+/**
+ * The route table. The router is supplied by the entry point: BrowserRouter in
+ * main.jsx, StaticRouter in entry-server.jsx when routes are prerendered.
+ */
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <Suspense fallback={<PageFallback />}>
         <Routes>
@@ -39,6 +43,6 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </>
   );
 }
